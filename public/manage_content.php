@@ -22,7 +22,7 @@ $subjectset = find_all_subjects();
                 {
 
                 ?>
-                   <li><?php echo $subject["menu_name"] . " (" . $subject["id"] . ")"; ?>
+                <a href="manage_content.php?subject= <?php echo $subject["id"]; ?>"><li><?php echo $subject["menu_name"] . " (" . $subject["id"] . ")"; ?></a>
                    
 
                        
@@ -34,7 +34,7 @@ $subjectset = find_all_subjects();
                            while($pages = mysqli_fetch_assoc($pageset)) {
                            ?>
                            
-                           <li><?php echo $pages["menu_name"]; ?></li>
+                           <a href="manage_content.php?pages= <?php echo $pages["id"]; ?>"<li><?php echo $pages["menu_name"]; ?></a>
                            
                            
                            <?php
