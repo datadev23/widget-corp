@@ -4,19 +4,11 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<?php include "../includes/dbconnection.php"?>
+<?php include "../includes/dbconnection.php";?>
  <?php include "../includes/functions.php"; ?> 
 <?php
-	$query  = "SELECT * ";
-	$query .= "FROM subjects ";
-	$query .= "WHERE visible = 1 ";
-	$query .= "ORDER BY position ASC";
-	$subjectset= mysqli_query($connection, $query);
-	// Test if there was a query error
-        
-        if (!$subjectset) {
-		die("Database query failed.");
-	}
+
+$subjectset = find_all_subjects();
 
 ?>
 
@@ -35,16 +27,7 @@ and open the template in the editor.
 
                        
                        <?php
-                       $query  = "SELECT * ";
-	$query .= "FROM pages ";
-	$query .= "WHERE visible = 1 ";
-        $query .= "AND subject_id = {$subject["id"]} ";
-	$query .= "ORDER BY position ASC";
-	$pageset = mysqli_query($connection, $query);
-	// Test if there was a query error
-	if (!$pageset) {
-		die("Database query failed.");
-	}
+                      $pageset = find_subject_by_id($subject["id"]);
                        ?>
                        <ul class="pages">
                           <?php 
