@@ -29,7 +29,7 @@ function find_all_subjects()
 }
 
 
-function find_subject_by_id($subject_id)
+function find_pages_for_subject($subject_id)
 {
     
     global $connection;
@@ -46,5 +46,6 @@ function find_subject_by_id($subject_id)
 
     return $pageset;
 }
+
 
 ?>
