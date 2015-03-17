@@ -13,28 +13,60 @@ $subjectset = find_all_subjects();
 ?>
 
 <?php include "../includes/layouts/header.php"; ?>
+
+<?php
+if (isset($_GET["subject"]))
+{
+$selected_subject_id = $_GET["subject"];
+ $selected_page_id = null;
+
+}
+elseif(isset($_GET['pages']))
+{
+    $selected_subject_id = null;
+ $selected_page_id = $_GET["pages"];  
+}
+else
+{
+ $selected_page_id = null;   
+ $selected_subject_id = null;
+}
+?>
   
     <div id="main">
         <div id="navigation">
             <ul class="subjects">
                  <?php 
+                  $subjectset = find_all_subjects();
                 while($subject = mysqli_fetch_assoc($subjectset))
                 {
 
                 ?>
-                <a href="manage_content.php?subject= <?php echo $subject["id"]; ?>"><li><?php echo $subject["menu_name"] . " (" . $subject["id"] . ")"; ?></a>
+                <?php
+                echo "<li";
+                if ($subject["id"] == $selected_subject_id) {
+                echo " class=\"selected\"";
+                }
+                echo ">";
+                        ?>
+                        <a href="manage_content.php?subject= <?php echo $subject["id"]; ?>"><?php echo $subject["menu_name"] . " (" . $subject["id"] . ")"; ?></a>
                    
 
                        
                        <?php
-                      $pageset = find_subject_by_id($subject["id"]);
+                      $pageset = find_pages_for_subject($subject["id"]);
                        ?>
                        <ul class="pages">
                           <?php 
                            while($pages = mysqli_fetch_assoc($pageset)) {
                            ?>
                            
-                           <a href="manage_content.php?pages= <?php echo $pages["id"]; ?>"<li><?php echo $pages["menu_name"]; ?></a>
+                          <li >
+                              <a href="manage_content.php?subject= <?php echo $pages["id"]; ?>">  
+                          <?php echo $pages["menu_name"] .  " (" . $pages["id"] . ")";  ?>
+                              </a> 
+                              
+                              </li>
                            
                            
                            <?php
@@ -60,7 +92,10 @@ $subjectset = find_all_subjects();
         
         <div id="page">
             <h2>Manage Content  </h2>
-         
+         <?php 
+        echo  $selected_page_id;   
+        echo $selected_subject_id; 
+         ?>
         
         </div>
     </div>
