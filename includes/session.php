@@ -14,6 +14,10 @@ function message() {
        $output = "<div class=\"message\">";
        $output .=  $_SESSION["message"];
        $output .=  "</div>";
+       
+       // clear the session message
+       $_SESSION["message"] = null;
+       
         return $output;
        }
       
