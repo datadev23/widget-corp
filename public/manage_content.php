@@ -8,7 +8,7 @@ and open the template in the editor.
  <?php include "../includes/functions.php"; ?> 
 <?php
 
-$subjectset = find_all_subjects();
+$subject_set = find_all_subjects();
 
 ?>
 
@@ -17,91 +17,57 @@ $subjectset = find_all_subjects();
 <?php
 if (isset($_GET["subject"]))
 {
-$selected_subject_id = $_GET["subject"];
- $selected_page_id = null;
+
+$current_subject =  find_subject_by_id($_GET["subject"]);
+$current_page = null;
+
+
 
 }
 elseif(isset($_GET['pages']))
 {
-    $selected_subject_id = null;
- $selected_page_id = $_GET["pages"];  
+
+$current_subject = null;
+ $current_page =  find_page_by_id($_GET["pages"]);
 }
 else
 {
- $selected_page_id = null;   
- $selected_subject_id = null;
+$current_page = null;    
+$current_subject = null;
 }
 ?>
   
     <div id="main">
         <div id="navigation">
-            <ul class="subjects">
-                 <?php 
-                  $subjectset = find_all_subjects();
-                while($subject = mysqli_fetch_assoc($subjectset))
-                {
-
-                ?>
-                <?php
-                echo "<li";
-                if ($subject["id"] == $selected_subject_id) {
-                echo " class=\"selected\"";
-                }
-                echo ">";
-                        ?>
-                        <a href="manage_content.php?subject= <?php echo $subject["id"]; ?>"><?php echo $subject["menu_name"] . " (" . $subject["id"] . ")"; ?></a>
-                   
-
-                       
-                       <?php
-                      $pageset = find_pages_for_subject($subject["id"]);
-                       ?>
-                       <ul class="pages">
-                          <?php 
-                           while($pages = mysqli_fetch_assoc($pageset)) {
-                           ?>
-                           
-                          <li >
-                              <a href="manage_content.php?subject= <?php echo $pages["id"]; ?>">  
-                          <?php echo $pages["menu_name"] .  " (" . $pages["id"] . ")";  ?>
-                              </a> 
-                              
-                              </li>
-                           
-                           
-                           <?php
-                               
-                               
-                           }
-                         ?>
-                       </ul>
-                       
-                       
-                       
-                       
-                       
-                   </li> 
-  
-                   <?php
-                   }
-                
-                ?>
-            </ul>
+          
+          <?php  echo navigation($current_subject, $current_page); ?>
             
         </div>
         
         <div id="page">
             <h2>Manage Content  </h2>
+            
+          
+  
          <?php 
-        echo  $selected_page_id;   
-        echo $selected_subject_id; 
-         ?>
+         if ($current_subject) { ?>
+       
+            <?php echo $current_subject["menu_name"];  ?>
+        <?php } elseif ($current_page){ ?>
+           <?php echo $current_page["menu_name"];  ?> 
+         <?php } else { ?>
+            Please select a subject or a page
+         <?php } ?>
+            
+        
+       
+       
         
         </div>
     </div>
 
 <?php // release the data
- mysqli_free_result($subjectset);
+ mysqli_free_result($subject_set);
 ?>
 
 
@@ -109,9 +75,12 @@ else
 
 <?php 
 // close the connection
+
+/*
+global $connection;
 if (isset($connection))
 {
     mysqli_close($connection);
 }
-    
+*/    
 ?>
