@@ -6,6 +6,7 @@
  * and open the template in the editor.
  */
 ?>
+<?php require_once "../includes/session.php";?>
 <?php include "../includes/dbconnection.php";?>
  <?php include "../includes/functions.php"; ?> 
 <?php
@@ -47,7 +48,9 @@ $current_subject = null;
         </div>
         
         <div id="page">
-           
+       <?php  
+        echo message();
+         ?>   
        <h2>Create Subject</h2>
      
 		<form action="create_subject.php" method="post">
