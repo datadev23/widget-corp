@@ -6,8 +6,9 @@
  * and open the template in the editor.
  */
 ?>
-<?php include "../includes/dbconnection.php";?>
- <?php include "../includes/functions.php"; ?> 
+<?php require_once "../includes/session.php";?>
+<?php require_once  "../includes/dbconnection.php";?>
+ <?php require_once  "../includes/functions.php"; ?> 
 
 
 <?php
@@ -45,7 +46,7 @@ if(isset($_POST["submit"])) {
  
     if ($result)
     {
-        
+       $_SESSION['message'] = "subject succesfully constructered"; 
        redirect_to("manage_content.php");
     }
  
