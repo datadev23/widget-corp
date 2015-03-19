@@ -4,8 +4,9 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<?php include "../includes/dbconnection.php";?>
- <?php include "../includes/functions.php"; ?> 
+<?php require_once "../includes/session.php";?>
+<?php require_once  "../includes/dbconnection.php";?>
+ <?php require_once "../includes/functions.php"; ?> 
 <?php
 
 $subject_set = find_all_subjects();
@@ -37,8 +38,6 @@ $current_subject = null;
 }
 ?>
 
-
-  
     <div id="main">
         <div id="navigation">
           
@@ -48,6 +47,9 @@ $current_subject = null;
         </div>
         
         <div id="page">
+               <?php  
+        echo message();
+         ?>   
             <h2>Manage Content  </h2>
             
           
