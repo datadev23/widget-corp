@@ -52,7 +52,7 @@ if(isset($_POST["submit"])) {
  
 }
 else
-{
+{    $_SESSION['message'] = "subject creation failed"; 
     redirect_to("new_subject.php");
 }
 
