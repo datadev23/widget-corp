@@ -9,6 +9,7 @@
 <?php require_once "../includes/session.php";?>
 <?php require_once  "../includes/dbconnection.php";?>
  <?php require_once  "../includes/functions.php"; ?> 
+ <?php require_once  "../includes/validation_functions.php"; ?> 
 
 
 <?php
@@ -28,6 +29,19 @@ if(isset($_POST["submit"])) {
     
     // clean data 
     $menu_name = mysql_clean($menu_name);
+    
+    // insert validation
+    $required_fields = array("menu_name", "position", 'visible');
+    validate_presences($required_fields);
+    
+    $field_with_max_lenghts = array("menu_name" => 30);
+   validate_max_lengths($fields_with_max_lengths);
+   
+   if(!empty($errors))
+   {
+      $_SESSION = $errors;
+      redirect_to("new_subject.php");
+   }
     
     // insert the data from the form into the database
     $query = "INSERT INTO subjects (";
