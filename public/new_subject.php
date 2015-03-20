@@ -50,12 +50,12 @@ $current_subject = null;
         <div id="page">
        <?php  
         echo message();
-         ?>   
+       ?>
        <h2>Create Subject</h2>
      
 		<form action="create_subject.php" method="post">
 		  <p>Menu name:
-		    <input type="text" name="menu_name" value="" />
+		    <input type="text" name="menu_name" value="<?php echo $current_subject["menu_name"] ;?>" />
 		  </p>
 		  <p>Position:
 		    <select name="position">
