@@ -23,3 +23,19 @@ function message() {
       
        
 }
+
+function errors() {
+    if (isset($_SESSION["errors"])) {
+        // return output and remove echos
+    
+       $errors =  $_SESSION["errors"];
+   
+       
+       // clear the session message
+       $_SESSION["errors"] = null;
+       
+        return $errors;
+       }
+      
+       
+}
