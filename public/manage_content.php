@@ -47,9 +47,12 @@ $current_subject = null;
         </div>
         
         <div id="page">
+        
                <?php  
         echo message();
          ?>   
+            
+            <a href="edit_subject.php?subject=<?php echo urlencode($current_subject["id"]); ?>">Edit Subject</a>
             <h2>Manage Content  </h2>
             
           
