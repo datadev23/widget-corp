@@ -137,7 +137,7 @@ function confirm_query($result_set) {
 			die("Database query failed.");
 		}
 	}
-
+        
 
 function redirect_to($new_location)
 {

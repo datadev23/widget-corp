@@ -18,6 +18,7 @@ and open the template in the editor.
     </head>
   <body>
      <div id="header"</div>
+     <h1> Widget Corp </h1>
     </div>
     
     </body>
